@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Asset Price</title>
+       <style>
+         html{
+          overflow-x: hidden;
+         }
+            body{
+            background-image:url("{%static '14.jpg'%}");
+            background-repeat:no-repeat;
+            background-attachment:fixed;
+            background-size:100% 100%;
+            }
+        h1{
+            font-size:60px;
+        }
+        input[type=submit]{
+            background-color:#000000;
+            color:white;
+            cursor:pointer;
+        }
+        .card{
+            width:54pc;
+            height:100%;
+            margin-top:12pc;
+            margin-left:12pc;
+        }
+        .card-header{
+            text-align:center;
+            border-radius:40px;
+            width:54pc;
+        }
+        #r2{
+          text-align:center;
+          margin-top:20px;
+        }
+
+        #btn1{
+          font-size: 20px;
+        }
+        #location{
+          width:50pc;
+        }
+        #bhk{
+          border-radius:200pc;
+          width:50pc;
+        }
+        #bedrooms{
+          border-radius:200pc;
+          width:50pc;
+        }
+        #total_sqft{
+          width:22pc;
+        }
+        #dim{
+          width:23.4pc;
+        }
+        #card1{
+          border-radius:40px;
+        }
+        #type{
+          width:50pc;
+        }
+        .icons{
+          padding-top:2pc;
+          padding-left:2pc;
+          color:black;
+        }
+        i {
+          text-shadow: 2px 4px 6px black;
+      }
+       </style>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+     <script src="https://kit.fontawesome.com/552998d52c.js" crossorigin="anonymous"></script>
+
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    </head>
+<body class="bg-dark">
+  <div class="icons">
+    <a href="/home"> <i class="fa-solid fa-house fa-2x"></i></a>
+  </div> 
+  <div class="container">
+      <div class="card" id="card1" >
+          <div class="card-header">
+              <h1>Welcome to Land Price Predictor</h1>
+          </div>
+          <br>
+          <div class="card-body">
+              <form action="result">
+                {% csrf_token %}
+                  <div class="row">
+                      <div class="col form-group">
+                        <label><b>Select the Location:</b></label>
+                        <select class="select-picker form-control" id="location" name="location" required="0">
+                             {% for location in locations %}
+                                <option value="{{location}}">{{location}}</option>
+                               {% endfor %}
+                        </select>       
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row"> 
+                      <div class="col form-group" >
+                        <label><b>Enter Dimensions:</b></label><br>
+                        <input type="number"  class="form-control" id="total_sqft" name="total_sqft"  required="1"/>
+                      </div>  
+                      <div class="col form-group">
+                        <label><b>Choose Dimensions:</b></label><br>
+                        <select class="form-control" id="dim" name="dim">
+                          <option value="1">Sq_Yard</option>
+                          <option value="2">Acre</option>
+                          <option value="3">Cents</option>
+                        </select>
+                      </div>  
+                    </div>
+                   <br>
+                   <center>
+                  <div class="col">
+                    <input type="submit" class="btn btn-primary"  id="btn1" value="Predict Price"/>  
+                  </div>  
+                </center>
+               </div>
+              </form>
+            </div>
+            </div>
+            <div class="row" id="r2">
+              <h2>{{result2}}</h2>
+            </div>
+      </div>
+</body>
+</html>
